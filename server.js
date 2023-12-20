@@ -49,11 +49,12 @@ if (cluster.isPrimary) {
   app.use(cookieParser());
   // Serve static files from the 'build' folder
   app.use(express.static(path.join(__dirname, "build")));
+
   //Set caching headers for static assets
-  app.use((req, res, next) => {
-    res.setHeader("Cache-Control", "public, max-age=31536000"); // 1 year cache
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   res.setHeader("Cache-Control", "public, max-age=31536000"); // 1 year cache
+  //   next();
+  // });
 
   //route
   app.use("/", require("./route/rootRoute"));
