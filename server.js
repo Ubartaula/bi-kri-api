@@ -15,9 +15,7 @@ if (cluster.isPrimary) {
     //console.log(`worker ${worker.process.pid} died`);
   });
 } else {
-  const compression = require("compression");
   const express = require("express");
-
   const connectDB = require("./config/connectDB");
   const { default: mongoose } = require("mongoose");
   const path = require("path");
@@ -38,7 +36,7 @@ if (cluster.isPrimary) {
   const PORT = process.env.PORT || 3100;
   //connect Data Base
   connectDB;
-  app.use(compression());
+  app.use(express.static(path.join(__dirname, "build")));
   setInterval(cleanLogFile, interval);
   setInterval(deleteUploads, 1000 * 60 * 60 * 24);
   //logger and cors
